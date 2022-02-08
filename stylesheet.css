@@ -1,3 +1,37 @@
-* {
-    background-color: red;
+nav {
+    background-color: aquamarine;
+    color: white;
+}
+
+.firstColumn {
+    border-right: 3px solid aquamarine;
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.secondColumn {
+    background-color: beige;
+    
+}
+
+.currentWeatherContainer {
+    height: 45%;
+    background-color: white;
+    border: 3px aquamarine solid;
+    margin: 10px;
+
+    
+}
+
+.columnContainer {
+   margin: 40px;
+   height: 100%;
+}
+
+html, body {
+    height: 100%;
+    background-color: beige;
 }

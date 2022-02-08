@@ -21,30 +21,29 @@
       <h1>WEATHER DASHBOARD</h1>
     </nav>
     <!--Column to split page in two 25/75-->
-    <div class="row justify-content-start">
+    <div class="columnContainer row justify-content-start">
       <!--First column-->
-      <div class="col-3">
+      <div class="firstColumn col-3">
         <h2>Search for a city</h2>
-        <form>
-          <input type="text" placeholder="Type a City" />
+        <form id = 'form'>
+          <input  id ='searchBar' type="text" placeholder="Type a City" />
         </form>
+        <button form = 'form' type = 'submit' class = 'searchButton'>Search</button>
+        <h4>History</h4>
       </div>
       <!--Second column-->
-      <div class="col-9">
+      <div class="secondColumn col-9">
         <!--container to display info-->
-        <div class="container"></div>
+        <div class="currentWeatherContainer"></div>
         <!--cards to display next 5 days-->
         <div class="card" style="width: 18rem">
-          <img src="..." class="card-img-top" alt="..." />
+          <img src="" class="card-img-top" alt="..." />
           <div class="card-body">
-            <p class="card-text">Date</p>
-          </div>
-          <div class="card" style="width: 18rem">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
           </div>
         </div>
       </div>
