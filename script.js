@@ -27,7 +27,7 @@ let weatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon=
 // let formEl = document.querySelector('#form');
 
 
-let getCityCords = function (city) {
+const getCityCords = function (city) {
     console.log(`Getting coordinates for: ${city}`)
     let geoApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${apiKey}`;
 
@@ -37,35 +37,78 @@ let getCityCords = function (city) {
         })
         .then(function (data) {
             console.log(data);
+
+            let latitude = data[0].lat;
+            let longitude = data[0].lon;
+            
+            console.log(`The latitude for ${city} is ${latitude}`);
+            console.log(`The longitude for ${city} is ${longitude}`);
+
+            getWeather(latitude, longitude);
         })
 
 }
 
 
 
-//fecthing lat and lon of city
-// fetch(geoApi)
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data) {
-//         console.log(data);
-//     })
+const getWeather = function (latitude, longitude) {
+    console.log(`Lat and lon for city: ${latitude} & ${longitude}`);
+    let weatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
 
-const getWeather = function (lat, lon) {
-    
+    fetch(weatherApi)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+
+            let temperature = data.current.temp;
+            temperature = Math.floor((temperature - 273.15) * 9 / 5 + 32);
+            console.log(`The temperature is: ${temperature}`);
+
+            let humidity = data.current.humidity;
+            console.log(`The humidity is: ${humidity}`);
+
+            let wind = data.current.wind_speed;
+            console.log(`The wind speed is: ${wind} `);
+
+            let uvIndex = data.current.uvi;
+            console.log(`The UV Index is : ${uvIndex}`);
+
+            let currentCity = document.createElement('h3');
+            let currentCityTemp = document.createElement('p');
+            let currentCityHumidity = document.createElement('p');
+            let currentCityWind = document.createElement('p');
+            let currentCityUvindex = document.createElement('p');
+
+            currentCity.textContent = srchBarEl.value.toUpperCase();
+            currentCityTemp.textContent = `Temperature: ${temperature}`;
+            currentCityHumidity.textContent = `Humidity: ${data.current.humidity}`;
+            currentCityWind.textContent = `Wind Speed: ${data.current.wind_speed}`;
+            currentCityUvindex.textContent = `UV Index: ${data.current.uvi}`;
+
+            weatherContainerEl.append(currentCity);
+            weatherContainerEl.append(currentCityTemp);
+            weatherContainerEl.append(currentCityHumidity);
+            weatherContainerEl.append(currentCityWind);
+            weatherContainerEl.append(currentCityUvindex);
+
+            srchBarEl.value = '';
+
+            
+
+    })
+
 }
 
+/*city name
+date
+icon representing the weather condition
+temperature
+humidity
+wind speed
+UV index */
 
-
-// //fecthing weather of city
-// fetch(requestUrl)
-//     .then(function (response) {
-//         return response.json();
-//     })
-//     .then(function (data) {
-//         console.log(data);
-//     })
 
 
 let formSubmitHandler = function (event) {
@@ -78,7 +121,6 @@ let formSubmitHandler = function (event) {
 
         getCityCords(city);
 
-        srchBarEl.value = '';
     } else {
         alert('Please enter a city');
     }
