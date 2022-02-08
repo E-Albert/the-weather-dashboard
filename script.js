@@ -95,11 +95,25 @@ const getWeather = function (latitude, longitude) {
 
             srchBarEl.value = '';
 
-            
+            //not finished. Making display for card
+            for (i = 1; i < 6; i++) {
+
+                let nextDayTemp = data.daily[i].temp.max;
+                console.log(`Temp: ${nextDayTemp}`);
+
+                let nextDayWind = data.daily[i].wind_speed;
+                console.log(`Wind: ${nextDayWind}`);
+
+                let nextDayHumidity = data.daily[i].humidity;
+                console.log(`Humidity: ${ nextDayHumidity }`);
+                
+            }
 
     })
 
 }
+
+//moment().format("MMM Do YY")
 
 /*city name
 date
