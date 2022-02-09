@@ -10,7 +10,7 @@ dyanmically change depending on the city*/
 let srchBtnEl = document.querySelector('.searchButton');
 let srchBarEl = document.querySelector('#searchBar');
 let weatherContainerEl = document.querySelector('.currentWeatherContainer');
-let cardContainerEl = document.querySelector('.card');
+let cardContainerEl = document.querySelector('.cardContainer');
 let formEl = document.querySelector('#form');
 
 //global variables
@@ -52,6 +52,8 @@ const getCityCords = function (city) {
 
 
 const getWeather = function (latitude, longitude) {
+
+    
     console.log(`Lat and lon for city: ${latitude} & ${longitude}`);
     let weatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
 
@@ -82,10 +84,10 @@ const getWeather = function (latitude, longitude) {
             let currentCityUvindex = document.createElement('p');
 
             currentCity.textContent = srchBarEl.value.toUpperCase();
-            currentCityTemp.textContent = `Temperature: ${temperature}`;
-            currentCityHumidity.textContent = `Humidity: ${data.current.humidity}`;
-            currentCityWind.textContent = `Wind Speed: ${data.current.wind_speed}`;
-            currentCityUvindex.textContent = `UV Index: ${data.current.uvi}`;
+            currentCityTemp.textContent = `Temperature: ${temperature}℉`;
+            currentCityHumidity.textContent = `Humidity: ${humidity}%`;
+            currentCityWind.textContent = `Wind Speed: ${wind} mph`;
+            currentCityUvindex.textContent = `UV Index: ${uvIndex}`;
 
             weatherContainerEl.append(currentCity);
             weatherContainerEl.append(currentCityTemp);
@@ -95,19 +97,45 @@ const getWeather = function (latitude, longitude) {
 
             srchBarEl.value = '';
 
-            //not finished. Making display for card
+            
             for (i = 1; i < 6; i++) {
 
                 let nextDayTemp = data.daily[i].temp.max;
+                nextDayTemp = Math.floor((nextDayTemp - 273.15) * 9 / 5 + 32);
                 console.log(`Temp: ${nextDayTemp}`);
 
                 let nextDayWind = data.daily[i].wind_speed;
                 console.log(`Wind: ${nextDayWind}`);
 
                 let nextDayHumidity = data.daily[i].humidity;
-                console.log(`Humidity: ${ nextDayHumidity }`);
+                console.log(`Humidity: ${nextDayHumidity}`);
                 
-            }
+                let card = document.createElement('div')
+                card.setAttribute('class', 'card');
+                let dayAfterTemp = document.createElement('p');
+                let dayAfterWind = document.createElement('p');
+                let dayAfterHumidity = document.createElement('p');
+
+                dayAfterTemp.textContent = `Temp: ${nextDayTemp} ℉`;
+                dayAfterWind.textContent = `Wind: ${nextDayWind} mph`;
+                dayAfterHumidity.textContent = `Humidity: ${nextDayHumidity}%`;
+                
+                card.append(dayAfterTemp);
+                card.append(dayAfterWind);
+                card.append(dayAfterHumidity);
+
+                cardContainerEl.append(card);
+                cardContainerEl.append(card);
+                cardContainerEl.append(card);
+                
+                
+            } 
+            
+           
+            
+
+
+
 
     })
 
@@ -126,13 +154,16 @@ UV index */
 
 
 let formSubmitHandler = function (event) {
+    weatherContainerEl.innerHTML = '';
     event.preventDefault(); 
     console.log('Submitting form')
 
+    
     let city = srchBarEl.value.trim();
     console.log(city);
     if (city) {
 
+       
         getCityCords(city);
 
     } else {

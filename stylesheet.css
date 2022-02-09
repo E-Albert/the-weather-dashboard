@@ -22,6 +22,7 @@ nav {
     background-color: white;
     border: 3px aquamarine solid;
     margin: 10px;
+    overflow: scroll;
 
     
 }
@@ -34,4 +35,15 @@ nav {
 html, body {
     height: 100%;
     background-color: beige;
+}
+
+
+.card {
+    border: 2px black solid;
+
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: space-evenly;
 }
