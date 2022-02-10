@@ -12,6 +12,7 @@ let srchBarEl = document.querySelector('#searchBar');
 let weatherContainerEl = document.querySelector('.currentWeatherContainer');
 let cardContainerEl = document.querySelector('.cardContainer');
 let formEl = document.querySelector('#form');
+let searchHistoryContainerEl = document.querySelector('#searchHistoryContainer');
 
 //global variables
 let searchHistory = [];
@@ -40,7 +41,7 @@ const getCityCords = function (city) {
 
             let latitude = data[0].lat;
             let longitude = data[0].lon;
-            
+
             console.log(`The latitude for ${city} is ${latitude}`);
             console.log(`The longitude for ${city} is ${longitude}`);
 
@@ -53,7 +54,7 @@ const getCityCords = function (city) {
 
 const getWeather = function (latitude, longitude) {
 
-    
+
     console.log(`Lat and lon for city: ${latitude} & ${longitude}`);
     let weatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
 
@@ -63,6 +64,8 @@ const getWeather = function (latitude, longitude) {
         })
         .then(function (data) {
             console.log(data);
+
+            let date = moment().format('MMMM Do YYYY');
 
             let temperature = data.current.temp;
             temperature = Math.floor((temperature - 273.15) * 9 / 5 + 32);
@@ -83,7 +86,7 @@ const getWeather = function (latitude, longitude) {
             let currentCityWind = document.createElement('p');
             let currentCityUvindex = document.createElement('p');
 
-            currentCity.textContent = srchBarEl.value.toUpperCase();
+            currentCity.textContent = `${srchBarEl.value.toUpperCase()} | ${date}`;
             currentCityTemp.textContent = `Temperature: ${temperature}℉`;
             currentCityHumidity.textContent = `Humidity: ${humidity}%`;
             currentCityWind.textContent = `Wind Speed: ${wind} mph`;
@@ -95,9 +98,10 @@ const getWeather = function (latitude, longitude) {
             weatherContainerEl.append(currentCityWind);
             weatherContainerEl.append(currentCityUvindex);
 
+
             srchBarEl.value = '';
 
-            
+
             for (i = 1; i < 6; i++) {
 
                 let nextDayTemp = data.daily[i].temp.max;
@@ -109,7 +113,7 @@ const getWeather = function (latitude, longitude) {
 
                 let nextDayHumidity = data.daily[i].humidity;
                 console.log(`Humidity: ${nextDayHumidity}`);
-                
+
                 let card = document.createElement('div')
                 card.setAttribute('class', 'card');
                 let dayAfterTemp = document.createElement('p');
@@ -119,7 +123,7 @@ const getWeather = function (latitude, longitude) {
                 dayAfterTemp.textContent = `Temp: ${nextDayTemp} ℉`;
                 dayAfterWind.textContent = `Wind: ${nextDayWind} mph`;
                 dayAfterHumidity.textContent = `Humidity: ${nextDayHumidity}%`;
-                
+
                 card.append(dayAfterTemp);
                 card.append(dayAfterWind);
                 card.append(dayAfterHumidity);
@@ -127,19 +131,47 @@ const getWeather = function (latitude, longitude) {
                 cardContainerEl.append(card);
                 cardContainerEl.append(card);
                 cardContainerEl.append(card);
-                
-                
-            } 
-            
-           
-            
 
 
-
-
-    })
-
+            }
+        })
 }
+
+//not done. finding a way to save to local storage and to bring back from local storage
+function saveTheCities(city) {
+    
+    console.log(city);
+
+    let button = document.createElement('button');
+    button.setAttribute('type', 'button');
+    button.setAttribute('class', 'cities');
+    let savedCity = srchBarEl.value.trim();
+    button.textContent = savedCity;
+    searchHistoryContainerEl.append(button);
+
+    searchHistory.push(city);
+    localStorage.setItem('cities', JSON.stringify(searchHistory));
+    
+    
+}
+
+// function bringTheCitiesBack() {
+    
+//     for (var i = 0; i < searchHistory.length; i++) {
+//         if (searchHistoryContainerEl.innerHTML = '') {
+//             let storedCities = localStorage.getItem(searchHistory);
+//             let oldStoredCities = JSON.parse(storedCities);
+//             console.log(storedCities);
+//             let button = document.createElement('button');
+//             button.setAttribute('type', 'button');
+//             button.setAttribute('class', 'cities');
+//             button.textContent = searchHistory[i];
+//             console.log(searchHistory[i]);
+//             searchHistoryContainerEl.append(button);
+        
+//         }
+//     }
+// }
 
 //moment().format("MMM Do YY")
 
@@ -155,20 +187,24 @@ UV index */
 
 let formSubmitHandler = function (event) {
     weatherContainerEl.innerHTML = '';
-    event.preventDefault(); 
+    cardContainerEl.innerHTML = '';
+    event.preventDefault();
     console.log('Submitting form')
 
-    
+
     let city = srchBarEl.value.trim();
     console.log(city);
     if (city) {
 
-       
+
         getCityCords(city);
+        saveTheCities(city);
 
     } else {
         alert('Please enter a city');
     }
 };
 
+
+// bringTheCitiesBack();
 formEl.addEventListener('submit', formSubmitHandler);
