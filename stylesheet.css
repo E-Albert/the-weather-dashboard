@@ -1,14 +1,33 @@
 nav {
     background-color: aquamarine;
-    color: white;
+    color: black;
 }
 
 .topDiv {
-    border-right: 3px solid aquamarine;
+    border-bottom: 3px solid white;
     background-color: beige;
     display: flex;
     flex-direction: column;
-    align-items: center;  
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;  
+    margin-top: 20px;
+}
+
+.topDiv button {
+    background-color: aquamarine;
+    color: black;
+    border: white 3px solid;
+    border-radius: 10px;
+}
+
+.topDiv input {
+    border: aquamarine 2px solid;
+    border-radius: 10px;
+}
+
+.firstColumn {
+border-right: 3px solid aquamarine;
 }
 
 .secondColumn {
@@ -19,12 +38,14 @@ nav {
     height: 45%;
     background-color: white;
     border: 3px aquamarine solid;
+    border-radius: 10px;
     margin: 10px;
     overflow: scroll;
 }
 
 .columnContainer {
-   margin: 40px;
+   margin-left: 40px;
+   margin-right: 40px;
    height: 100%;
 }
 
@@ -36,6 +57,7 @@ html, body {
 
 .card {
     border: 3px white solid;
+    border-radius: 10px;
     background-color: aquamarine;
     height: 200px;
     width: 150px;
@@ -53,8 +75,16 @@ html, body {
 #searchHistoryContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
     gap: 20px;
     overflow: scroll;
+    height: 300px;
+}
+
+.cities {
+    background-color: aquamarine;
+    color: black;
+    border: white 3px solid;
+    border-radius: 10px;
 }
