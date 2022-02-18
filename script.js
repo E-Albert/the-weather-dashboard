@@ -99,22 +99,22 @@ const getWeather = function (latitude, longitude) {
 
                 let card = document.createElement('div')
                 card.setAttribute('class', 'card');
+                let days = document.createElement('h5');
                 let dayAfterTemp = document.createElement('p');
                 let dayAfterWind = document.createElement('p');
                 let dayAfterHumidity = document.createElement('p');
 
+                days.textContent = `${[i]} Day(s) After`;
                 dayAfterTemp.textContent = `Temp: ${nextDayTemp} ℉`;
                 dayAfterWind.textContent = `Wind: ${nextDayWind} mph`;
                 dayAfterHumidity.textContent = `Humidity: ${nextDayHumidity}%`;
 
+                card.append(days);
                 card.append(dayAfterTemp);
                 card.append(dayAfterWind);
                 card.append(dayAfterHumidity);
 
                 cardContainerEl.append(card);
-                cardContainerEl.append(card);
-                cardContainerEl.append(card);
-
 
             }
         })
