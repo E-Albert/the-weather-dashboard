@@ -1,11 +1,3 @@
-/* function to save to local storage
-a way to pull items from local storage
-utilize weather api
-use information from api to build the display
-dyanmically change depending on the city*/
-
-
-
 //DOM elements
 let srchBtnEl = document.querySelector('.searchButton');
 let srchBarEl = document.querySelector('#searchBar');
@@ -17,17 +9,8 @@ let searchHistoryContainerEl = document.querySelector('#searchHistoryContainer')
 //global variables
 let searchHistory = [];
 let apiKey = 'e681224f251edf9fe2b18dfc26040eac';
-let weatherApi = `https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=${apiKey}`;
-// let geoApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${apiKey}`;
 
-//DOM elements
-// let srchBtnEl = document.querySelector('.searchButton');
-// let srchBarEl = document.querySelector('#searchBar');
-// let weatherContainerEl = document.querySelector('.currentWeatherContainer');
-// let cardContainerEl = document.querySelector('.card');
-// let formEl = document.querySelector('#form');
-
-
+//grabs latitdude and longitude from city inputted by user
 const getCityCords = function (city) {
     console.log(`Getting coordinates for: ${city}`)
     let geoApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${apiKey}`;
@@ -51,7 +34,7 @@ const getCityCords = function (city) {
 }
 
 
-
+//grabs the weather and specific attributes of the weather from the city inputted by user
 const getWeather = function (latitude, longitude) {
 
 
@@ -101,7 +84,7 @@ const getWeather = function (latitude, longitude) {
 
             srchBarEl.value = '';
 
-
+            //creates a card for the next 5 days and inputs certain weather elements on it
             for (i = 1; i < 6; i++) {
 
                 let nextDayTemp = data.daily[i].temp.max;
@@ -137,7 +120,7 @@ const getWeather = function (latitude, longitude) {
         })
 }
 
-//not done. finding a way to save to local storage and to bring back from local storage
+//puts the cities searched by the user into the history section and saves them to local storage
 function saveTheCities(city) {
     
     console.log(city);
@@ -155,36 +138,7 @@ function saveTheCities(city) {
     
 }
 
-// function bringTheCitiesBack() {
-    
-//     for (var i = 0; i < searchHistory.length; i++) {
-//         if (searchHistoryContainerEl.innerHTML = '') {
-//             let storedCities = localStorage.getItem(searchHistory);
-//             let oldStoredCities = JSON.parse(storedCities);
-//             console.log(storedCities);
-//             let button = document.createElement('button');
-//             button.setAttribute('type', 'button');
-//             button.setAttribute('class', 'cities');
-//             button.textContent = searchHistory[i];
-//             console.log(searchHistory[i]);
-//             searchHistoryContainerEl.append(button);
-        
-//         }
-//     }
-// }
-
-//moment().format("MMM Do YY")
-
-/*city name
-date
-icon representing the weather condition
-temperature
-humidity
-wind speed
-UV index */
-
-
-
+//empties previous information and starts the search for city inputted
 let formSubmitHandler = function (event) {
     weatherContainerEl.innerHTML = '';
     cardContainerEl.innerHTML = '';
@@ -205,6 +159,5 @@ let formSubmitHandler = function (event) {
     }
 };
 
-
-// bringTheCitiesBack();
+//waits for the submit button to be clicked so it can start acquiring weather information
 formEl.addEventListener('submit', formSubmitHandler);
