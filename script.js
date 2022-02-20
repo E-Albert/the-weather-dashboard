@@ -13,7 +13,7 @@ let apiKey = 'e681224f251edf9fe2b18dfc26040eac';
 //grabs latitdude and longitude from city inputted by user
 const getCityCords = function (city) {
     console.log(`Getting coordinates for: ${city}`)
-    let geoApi = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${apiKey}`;
+    let geoApi = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${apiKey}`;
 
     fetch(geoApi)
         .then(function (response) {
