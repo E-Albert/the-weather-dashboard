@@ -1,3 +1,7 @@
+* {
+    font-family: 'Play', sans-serif;;
+}
+
 nav {
     background-color: aquamarine;
     color: black;
@@ -24,6 +28,7 @@ nav {
 .topDiv input {
     border: aquamarine 2px solid;
     border-radius: 10px;
+    text-align: center;
 }
 
 .firstColumn {
@@ -41,6 +46,7 @@ border-right: 3px solid aquamarine;
     border-radius: 10px;
     margin: 10px;
     overflow: scroll;
+    padding: 10px;
 }
 
 .columnContainer {
@@ -70,6 +76,8 @@ html, body {
 .cardContainer {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+
 }
 
 #searchHistoryContainer {
@@ -87,4 +95,39 @@ html, body {
     color: black;
     border: white 3px solid;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 480px ) {
+    
+
+    .secondColumn {
+       padding: 0;
+    }
+
+    .currentWeatherContainer{
+        margin: 10px;
+        height: 20%;
+    }
+
+    .columnContainer {
+       margin: 0;
+    }
+    
+    .topDiv h2{
+       font-size: small;
+       text-align: center;
+    }
+
+    .topDiv h4 {
+        font-size: small;
+    }
+
+    .topDiv input {
+        width:  100%;
+        font-size: small;
+    }
+
+    .topDiv button {
+        font-size: x-small;
+    }
 }
