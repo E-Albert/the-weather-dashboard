@@ -33,10 +33,12 @@ nav {
 
 .firstColumn {
 border-right: 3px solid aquamarine;
+overflow: scroll;
 }
 
 .secondColumn {
     background-color: beige;
+    overflow: scroll;
 }
 
 .currentWeatherContainer {
