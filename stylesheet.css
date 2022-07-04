@@ -107,6 +107,11 @@ html, body {
     .currentWeatherContainer{
         margin: 10px;
         height: 20%;
+        font-size: small;
+    }
+
+    .currentWeatherContainer p {
+        margin-bottom: 0;
     }
 
     .columnContainer {
@@ -128,6 +133,28 @@ html, body {
     }
 
     .topDiv button {
+        font-size: x-small;
+    }
+
+    .cardContainer {
+        flex-direction: column;
+    }
+
+    .card {
+        width: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        height: 125px;
+        font-size: small;
+        padding: 20px;
+    }
+
+    .card p {
+        margin-bottom: 0px;
+    }
+
+    .cities {
         font-size: x-small;
     }
 }
