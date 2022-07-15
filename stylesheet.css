@@ -99,7 +99,7 @@ html, body {
     border-radius: 10px;
 }
 
-@media screen and (max-width: 480px ) {
+@media screen and (max-width: 768px ) {
     
 
     .secondColumn {
@@ -160,3 +160,4 @@ html, body {
         font-size: x-small;
     }
 }
+
